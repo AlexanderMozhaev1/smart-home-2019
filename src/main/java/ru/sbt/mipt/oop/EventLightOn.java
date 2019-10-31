@@ -6,10 +6,14 @@ public class EventLightOn implements Event {
         for (Room room : smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 if (light.getId().equals(objectId)) {
-                    light.setOn(true);
-                    System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
+                    turnOnLights(room, light);
                 }
             }
         }
+    }
+
+    private void turnOnLights(Room room, Light light) {
+        light.setOn(true);
+        System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
     }
 }

@@ -5,14 +5,14 @@ import java.io.IOException;
 public class Application {
 
     public static void main(String... args) throws IOException {
-        EventHandling eventHandling = new EventHandlingDoorLightOnOff();
-        SmartHomeRead smartHomeRead = new SmartHomeReadJson("smart-home-1.js");
+        EventHandling eventHandling = new EventHandlingDoorClosedOpenLightOnOff();
+        SmartHomeTakeEvent smartHomeTakeEventJson = new SmartHomeTakeEventJson("smart-home-1.js");
         // считываем состояние дома из файла
-        SmartHome smartHome = smartHomeRead.smartHomeReader();
+        SmartHome smartHome = smartHomeTakeEventJson.takeSmartHome();
         // начинаем цикл обработки событий
         SensorEvent event = getNextSensorEvent();
         while (event != null){
-            eventHandling.handlingEvent(event, smartHome);
+            eventHandling.produceEvent(event, smartHome);
             event = getNextSensorEvent();
         }
     }

@@ -1,8 +1,8 @@
 package ru.sbt.mipt.oop;
 
-public class EventHandlingDoorLightOnOff implements EventHandling {
+public class EventHandlingDoorClosedOpenLightOnOff implements EventHandling {
     @Override
-    public void handlingEvent(SensorEvent event, SmartHome smartHome) {
+    public void produceEvent(SensorEvent event, SmartHome smartHome) {
         SensorEventType type = event.getType();
         System.out.println("Got event: " + event);
         Event eventType = null;
