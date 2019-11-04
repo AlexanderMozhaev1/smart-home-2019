@@ -1,14 +1,11 @@
 package ru.sbt.mipt.oop;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Consumer;
 
 public class Application {
 
     public static void main(String... args) throws IOException {
-        EventHandling eventHandling = new EventHandlingDoorClosedOpenLightOnOff();
+        EventHandling eventHandling = new EventHandlingDoorLightAlarm();
         SmartHomeTakeEvent smartHomeTakeEventJson = new SmartHomeTakeEventJson("smart-home-1.js");
         // считываем состояние дома из файла
         SmartHome smartHome = smartHomeTakeEventJson.takeSmartHome();
@@ -27,7 +24,7 @@ public class Application {
     private static SensorEvent getNextSensorEvent() {
         // pretend like we're getting the events from physical world, but here we're going to just generate some random events
         if (Math.random() < 0.05) return null; // null means end of event stream
-        SensorEventType sensorEventType = SensorEventType.values()[(int) (4 * Math.random())];
+        SensorEventType sensorEventType = SensorEventType.values()[(int) (6 * Math.random())];
         String objectId = "" + ((int) (10 * Math.random()));
         return new SensorEvent(sensorEventType, objectId);
     }

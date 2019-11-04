@@ -1,10 +1,19 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.Alarm.Alarm;
+import ru.sbt.mipt.oop.Alarm.AlarmStateType;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Consumer;
 
 public class SmartHome {
+    private Alarm alarm = new Alarm();
+
+    public AlarmStateType getAlarmState(){ return alarm.getState(); }
+
+    public void entryAlramCode(String code){ alarm.entryCode(code); }
+
     Collection<Room> rooms;
 
     public SmartHome() {

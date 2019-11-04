@@ -1,8 +1,9 @@
 package ru.sbt.mipt.oop;
 
-import java.util.ArrayList;
+import ru.sbt.mipt.oop.Door.Door;
+import ru.sbt.mipt.oop.Light.Light;
+
 import java.util.Collection;
-import java.util.Collections;
 import java.util.function.Consumer;
 
 public class Room {
