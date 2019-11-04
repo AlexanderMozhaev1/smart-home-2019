@@ -3,12 +3,8 @@ package ru.sbt.mipt.oop;
 public class LightOffHome{
     // если мы получили событие о закрытие двери в холле - это значит, что была закрыта входная дверь.
     // в этом случае мы хотим автоматически выключить свет во всем доме (это же умный дом!)
-    public void offLightHome(Room room, SmartHome smartHome){
-        for (Room homeRoom : smartHome.getRooms()) {
-            for (Light light : homeRoom.getLights()) {
-                turnOffLights(light);
-            }
-        }
+    public void offLightHome(SmartHome smartHome){
+        smartHome.iteratorRoom(r -> r.iteratorLights(l -> turnOffLights(l)));
     }
 
     private void turnOffLights(Light light) {

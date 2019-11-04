@@ -3,13 +3,11 @@ package ru.sbt.mipt.oop;
 public class EventLightOn implements Event {
     @Override
     public void eventRun(String objectId, SmartHome smartHome) {
-        for (Room room : smartHome.getRooms()) {
-            for (Light light : room.getLights()) {
-                if (light.getId().equals(objectId)) {
-                    turnOnLights(room, light);
-                }
+        smartHome.iteratorRoom(r-> r.iteratorLights(l -> {
+            if (l.getId().equals(objectId)) {
+                turnOnLights(r, l);
             }
-        }
+        }));
     }
 
     private void turnOnLights(Room room, Light light) {
