@@ -1,5 +1,10 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.Door.EventDoorClosed;
+import ru.sbt.mipt.oop.Door.EventDoorOpen;
+import ru.sbt.mipt.oop.Light.EventLightOff;
+import ru.sbt.mipt.oop.Light.EventLightOn;
+
 public class EventHandlingDoorClosedOpenLightOnOff implements EventHandling {
     @Override
     public void produceEvent(SensorEvent event, SmartHome smartHome) {
