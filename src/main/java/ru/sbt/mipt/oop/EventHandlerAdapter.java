@@ -2,7 +2,6 @@ package ru.sbt.mipt.oop;
 
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import com.coolcompany.smarthome.events.EventHandler;
-import ru.sbt.mipt.oop.*;
 import ru.sbt.mipt.oop.Alarm.AlarmStateType;
 import ru.sbt.mipt.oop.Alarm.EventAlarmActivate;
 import ru.sbt.mipt.oop.Alarm.EventAlarmDeactivate;

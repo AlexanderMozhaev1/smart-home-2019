@@ -1,7 +1,6 @@
 package ru.sbt.mipt.oop.Door;
 
 import ru.sbt.mipt.oop.*;
-import ru.sbt.mipt.oop.Light.LightOffHome;
 
 public class EventDoorClosed implements Event {
     @Override
