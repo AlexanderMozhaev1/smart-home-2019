@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop;
 
+
 import ru.sbt.mipt.oop.Door.Door;
 import ru.sbt.mipt.oop.Light.Light;
 
