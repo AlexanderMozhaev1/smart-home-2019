@@ -1,6 +1,11 @@
 package ru.sbt.mipt.oop;
 
+
+import ru.sbt.mipt.oop.Door.Door;
+import ru.sbt.mipt.oop.Light.Light;
+
 import java.util.Collection;
+import java.util.function.Consumer;
 
 public class Room {
     private Collection<Light> lights;
@@ -12,6 +17,10 @@ public class Room {
         this.doors = doors;
         this.name = name;
     }
+
+    public void iteratorLights(Consumer<? super Light> consumer){ lights.forEach(consumer);}
+
+    public void iteratorDoors(Consumer<? super Door> consumer){ doors.forEach(consumer);}
 
     public Collection<Light> getLights() {
         return lights;
