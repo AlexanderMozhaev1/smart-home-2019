@@ -1,21 +1,19 @@
 package ru.sbt.mipt.oop;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Consumer;
+public class EventLoop {
+    EventHandling eventHandling;
+    SmartHome smartHome;
 
-public class Application {
+    public EventLoop(EventHandling eventHandling, SmartHome smartHome) {
+        this.eventHandling = eventHandling;
+        this.smartHome = smartHome;
+    }
 
-    public static void main(String... args) throws IOException {
-        EventHandling eventHandling = new EventHandlingDoorClosedOpenLightOnOff();
-        SmartHomeTakeEvent smartHomeTakeEventJson = new SmartHomeTakeEventJson("smart-home-1.js");
-        // считываем состояние дома из файла
-        SmartHome smartHome = smartHomeTakeEventJson.takeSmartHome();
+    public void startCycle() {
         // начинаем цикл обработки событий
         SensorEvent event = getNextSensorEvent();
         while (event != null){
-            eventHandling.produceEvent(event, smartHome);
+            this.eventHandling.produceEvent(event, this.smartHome);
             event = getNextSensorEvent();
         }
     }
