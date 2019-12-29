@@ -1,5 +1,5 @@
 package ru.sbt.mipt.oop;
 
-public interface Event {
+public interface EventSmartHome {
     public void eventRun(String objectId, SmartHome smartHome);
 }

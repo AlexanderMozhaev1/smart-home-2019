@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 
 public class Application {
 
-    public static void main(String... args) throws IOException {
+    public static void main(String... args){
         EventHandling eventHandling = new EventHandlingDoorClosedOpenLightOnOff();
         SmartHomeTakeEvent smartHomeTakeEventJson = new SmartHomeTakeEventJson("smart-home-1.js");
         // считываем состояние дома из файла
