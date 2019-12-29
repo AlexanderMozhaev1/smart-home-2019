@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Consumer;
 
-public class Room {
+public class Room  implements Actionable {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;
@@ -16,9 +16,13 @@ public class Room {
         this.name = name;
     }
 
-    public void iteratorLights(Consumer<? super Light> consumer){ lights.forEach(consumer);}
+    public SmartHomeObjectIterator iteratorLights(){
+        return new SmartHomeObjectIterator((ArrayList) lights);
+    }
 
-    public void iteratorDoors(Consumer<? super Door> consumer){ doors.forEach(consumer);}
+    public SmartHomeObjectIterator iteratorDoors(){
+        return new SmartHomeObjectIterator((ArrayList) doors);
+    }
 
     public Collection<Light> getLights() {
         return lights;
@@ -30,5 +34,10 @@ public class Room {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void execute(Action action) {
+        action.execute(this);
     }
 }

@@ -5,21 +5,21 @@ public class EventHandlingDoorClosedOpenLightOnOff implements EventHandling {
     public void produceEvent(SensorEvent event, SmartHome smartHome) {
         SensorEventType type = event.getType();
         System.out.println("Got event: " + event);
-        Event eventType = null;
+        EventSmartHome eventSmartHomeType = null;
         switch (type){
             case LIGHT_ON:
-                eventType = new EventLightOn();
+                eventSmartHomeType = new EventSmartHomeLightOn();
                 break;
             case LIGHT_OFF:
-                eventType = new EventLightOff();
+                eventSmartHomeType = new EventSmartHomeLightOff();
                 break;
             case DOOR_OPEN:
-                eventType = new EventDoorOpen();
+                eventSmartHomeType = new EventSmartHomeDoorOpen();
                 break;
             case DOOR_CLOSED:
-                eventType = new EventDoorClosed();
+                eventSmartHomeType = new EventSmartHomeDoorClosed();
                 break;
         }
-        eventType.eventRun(event.getObjectId(),smartHome);
+        eventSmartHomeType.eventRun(event.getObjectId(),smartHome);
     }
 }
