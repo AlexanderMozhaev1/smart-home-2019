@@ -3,17 +3,15 @@ package ru.sbt.mipt.oop;
 public class EventDoorOpen implements Event {
     @Override
     public void eventRun(String objectId, SmartHome smartHome) {
-        for (Room room : smartHome.getRooms()) {
-            for (Door door : room.getDoors()) {
-                if (door.getId().equals(objectId)) {
-                    openDoor(room, door);
-                }
+        smartHome.iteratorRoom(r->r.iteratorDoors(d -> {
+            if (d.getId().equals(objectId)) {
+                openDoor(r, d);
             }
-        }
+        }));
     }
 
     private void openDoor(Room room, Door door) {
-        door.setOpen(false);
+        door.setOpen(true);
         System.out.println("Door " + door.getId() + " in room " + room.getName() + " was open.");
     }
 

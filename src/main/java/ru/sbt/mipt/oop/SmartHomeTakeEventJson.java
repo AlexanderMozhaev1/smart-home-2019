@@ -8,8 +8,8 @@ import java.nio.file.Paths;
 
 public class SmartHomeTakeEventJson implements SmartHomeTakeEvent {
     String fileName;
-    SmartHomeTakeEventJson(String _fileName){
-        fileName = _fileName;
+    SmartHomeTakeEventJson(String fileName){
+        this.fileName = fileName;
     }
     @Override
     public SmartHome takeSmartHome() {
