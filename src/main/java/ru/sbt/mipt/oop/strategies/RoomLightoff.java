@@ -15,6 +15,10 @@ public class RoomLightoff implements Action<Room> {
 
     private void turnOffLights(Light light) {
         light.setOn(false);
+        commandRun(light);
+    }
+
+    private void commandRun(Light light) {
         SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
         sendCommand(command);
     }

@@ -1,5 +1,5 @@
 package ru.sbt.mipt.oop;
 
 public interface EventSmartHome {
-    public void eventRun(String objectId, SmartHome smartHome);
+    public boolean eventRun(String objectId, SmartHome smartHome, SensorEventType type);
 }

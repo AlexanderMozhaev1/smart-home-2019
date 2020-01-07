@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.CommandType;
+import ru.sbt.mipt.oop.SensorCommand;
+import ru.sbt.mipt.oop.SmartHome;
 import ru.sbt.mipt.oop.strategies.RoomLightoff;
 import ru.sbt.mipt.oop.strategies.Rooms;
 

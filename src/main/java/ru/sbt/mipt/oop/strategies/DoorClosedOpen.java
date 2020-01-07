@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop.strategies;
 
 import ru.sbt.mipt.oop.*;
+import ru.sbt.mipt.oop.LightOffHome;
 
 public class DoorClosedOpen implements Action<Room> {
     private String objectId;

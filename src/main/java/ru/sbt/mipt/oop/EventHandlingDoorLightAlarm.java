@@ -1,54 +1,35 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.Alarm.AlarmStateType;
-import ru.sbt.mipt.oop.Alarm.EventAlarmActivate;
-import ru.sbt.mipt.oop.Alarm.EventAlarmDeactivate;
-import ru.sbt.mipt.oop.Door.EventDoorClosed;
-import ru.sbt.mipt.oop.Door.EventDoorOpen;
-import ru.sbt.mipt.oop.Light.EventLightOff;
-import ru.sbt.mipt.oop.Light.EventLightOn;
+import ru.sbt.mipt.oop.alarm.AlarmStateActivate;
+import ru.sbt.mipt.oop.alarm.AlarmStateDanger;
 
 public class EventHandlingDoorLightAlarm implements EventHandling {
     @Override
-    public void produceEvent(SensorEvent event, SmartHome smartHome) {
+    public void produceEvent(SensorEvent event, SmartHome smartHome, EventSmartHome chain[]) {
         SensorEventType type = event.getType();
         System.out.println("Got event: " + event);
-        Event eventType = null;
-        switch (type){
-            case LIGHT_ON:
-                eventType = new EventLightOn();
-                break;
-            case LIGHT_OFF:
-                eventType = new EventLightOff();
-                break;
-            case DOOR_OPEN:
-                eventType = new EventDoorOpen();
-                break;
-            case DOOR_CLOSED:
-                eventType = new EventDoorClosed();
-                break;
-            case ALARM_ACTIVATE:
-                eventType = new EventAlarmActivate();
-                break;
-            case ALARM_DEACTIVATE:
-                eventType = new EventAlarmDeactivate();
-                break;
-        }
-
-        controlAlarmState(event, smartHome, eventType);
+        runHandling(event, smartHome, type, chain);
     }
-    public void controlAlarmState(SensorEvent event, SmartHome smartHome, Event eventType){
-        if(smartHome.getAlarmState() == AlarmStateType.ACTIVATE){
+
+    private void runHandling(SensorEvent event, SmartHome smartHome, SensorEventType type, EventSmartHome chain[]){
+        for (EventSmartHome eventType : chain) {
+            if(controlAlarmState(event, smartHome, eventType, type)) break;
+        }
+    }
+
+    private boolean controlAlarmState(SensorEvent event, SmartHome smartHome, EventSmartHome eventType, SensorEventType type){
+        if(smartHome.getAlarm().getAlarmState() instanceof AlarmStateActivate){
             if(event.getType() != SensorEventType.ALARM_ACTIVATE && event.getType() != SensorEventType.ALARM_DEACTIVATE){
-                smartHome.entryAlramCode(null);
-                return;
+                smartHome.getAlarm().danger();
+                System.out.println("danger");
+                return true;
             }
         }
-        if(smartHome.getAlarmState() == AlarmStateType.ACTIVATE){
+        if(smartHome.getAlarm().getAlarmState() instanceof AlarmStateDanger){
             if(event.getType() != SensorEventType.ALARM_ACTIVATE && event.getType() != SensorEventType.ALARM_DEACTIVATE){
-                return;
+                return true;
             }
         }
-        eventType.eventRun(event.getObjectId(),smartHome);
+        return eventType.eventRun(event.getObjectId(),smartHome, type);
     }
 }

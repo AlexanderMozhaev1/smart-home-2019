@@ -1,10 +1,7 @@
 package ru.sbt.mipt.oop;
 
-import ru.sbt.mipt.oop.Door.Door;
-import ru.sbt.mipt.oop.Light.Light;
-
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.function.Consumer;
 
 public class Room  implements Actionable {
     private Collection<Light> lights;
@@ -23,14 +20,6 @@ public class Room  implements Actionable {
 
     public SmartHomeObjectIterator iteratorDoors(){
         return new SmartHomeObjectIterator((ArrayList) doors);
-    }
-
-    public Collection<Light> getLights() {
-        return lights;
-    }
-
-    public Collection<Door> getDoors() {
-        return doors;
     }
 
     public String getName() {
