@@ -36,7 +36,7 @@ public class Alarm  implements Actionable {
         if(alarmState == null) {
             this.alarmState = new AlarmStateDeactivate();
         }
-        return alarmState.getState();
+        return alarmState;
     }
 
     @Override

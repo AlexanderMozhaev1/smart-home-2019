@@ -2,10 +2,6 @@ package ru.sbt.mipt.oop.alarm;
 
 public class AlarmStateActivate implements AlarmState {
 
-    public AlarmState getState() {
-        return this;
-    }
-
     @Override
     public void activate(Alarm alarm, String code) {
 
