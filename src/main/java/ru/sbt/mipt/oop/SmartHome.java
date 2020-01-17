@@ -24,10 +24,6 @@ public class SmartHome implements Actionable {
         rooms.add(room);
     }
 
-    public SmartHomeObjectIterator iteratorRoom(){
-        return new SmartHomeObjectIterator((ArrayList) rooms);
-    }
-
     public Collection<Room> getRooms() {
         return rooms;
     }

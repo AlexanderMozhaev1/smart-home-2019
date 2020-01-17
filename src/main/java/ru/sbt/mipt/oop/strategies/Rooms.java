@@ -13,11 +13,6 @@ public class Rooms implements Action<SmartHome> {
     }
 
     @Override
-    public void execute(SmartHome smartHome) {
-        SmartHomeObjectIterator<Room> iterator = smartHome.iteratorRoom();
-        while (iterator.hasNext()){
-            Room room = iterator.getNext();
-            room.execute(action);
-        }
-    }
+    public void execute(SmartHome smartHome) { smartHome.getRooms().forEach(r -> r.execute(action)); }
+
 }

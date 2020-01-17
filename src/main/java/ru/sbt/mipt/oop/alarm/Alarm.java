@@ -12,19 +12,9 @@ public class Alarm  implements Actionable {
         this.alarmState = new AlarmStateDeactivate();
     }
 
-    public void activate(String code){
-        if(checkCode(code))
-            alarmState.activate(this, code);
-        else
-            System.out.println("Не верный код.");
-    }
+    public void activate(String code){ alarmState.activate(this, code); }
 
-    public void deactivate(String code){
-        if(checkCode(code))
-            alarmState.deactivate(this, code);
-        else
-            danger();
-    }
+    public void deactivate(String code){ alarmState.deactivate(this, code); }
 
     public void danger(){ alarmState.danger(this); }
 
@@ -44,6 +34,6 @@ public class Alarm  implements Actionable {
         action.execute(this);
     }
 
-    private boolean checkCode(String code) { return this.code.equals(code); }
+    public boolean checkCode(String code) { return this.code.equals(code); }
 
 }
