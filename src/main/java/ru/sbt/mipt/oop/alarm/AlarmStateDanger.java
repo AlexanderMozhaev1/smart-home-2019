@@ -4,12 +4,18 @@ public class AlarmStateDanger implements AlarmState {
 
     @Override
     public void activate(Alarm alarm, String code) {
-        alarm.setAlarmState(new AlarmStateActivate());
+        if(alarm.checkCode(code))
+            alarm.setAlarmState(new AlarmStateActivate());
+        else
+            System.out.println("Не верный код.");
     }
 
     @Override
     public void deactivate(Alarm alarm, String code) {
-        alarm.setAlarmState(new AlarmStateDeactivate());
+        if(alarm.checkCode(code))
+            alarm.setAlarmState(new AlarmStateDeactivate());
+        else
+            alarm.danger();
     }
 
     @Override
