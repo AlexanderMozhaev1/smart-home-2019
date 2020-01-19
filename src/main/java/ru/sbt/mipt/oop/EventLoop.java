@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class EventLoop {
     EventHandling eventHandling;
     SmartHome smartHome;

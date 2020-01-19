@@ -2,13 +2,17 @@ package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.alarm.AlarmStateActivate;
 import ru.sbt.mipt.oop.alarm.AlarmStateDanger;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EventHandlingDoorLightAlarm implements EventHandling {
     @Override
     public void produceEvent(SensorEvent event, SmartHome smartHome, EventSmartHome chain[]) {
-        SensorEventType type = event.getType();
-        System.out.println("Got event: " + event);
-        runHandling(event, smartHome, type, chain);
+        if(event != null) {
+            SensorEventType type = event.getType();
+            System.out.println("Got event: " + event);
+            runHandling(event, smartHome, type, chain);
+        }
     }
 
     private void runHandling(SensorEvent event, SmartHome smartHome, SensorEventType type, EventSmartHome chain[]){
