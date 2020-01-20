@@ -16,6 +16,7 @@ import ru.sbt.mipt.oop.alarm.EventSmartHomeAlarmDeactivate;
 @Configuration
 @ComponentScan
 public class ConfigurationSmartHome {
+
     @Bean
     SensorEventsManager sensorEventsManager() {
         EventSmartHome chain[] = {new EventSmartHomeDoorClosed(), new EventSmartHomeDoorOpen(),
@@ -24,19 +25,24 @@ public class ConfigurationSmartHome {
 
         EventAdapter adapters[] = {new DoorAdapter(), new LightAdapter()};
 
-        EventHandling eventHandling = new EventHandlingDoorLightAlarm();
-
-        SmartHomeTakeEvent smartHomeTakeEventJson = new SmartHomeTakeEventJson("smart-home-1.js");
-        SmartHome smartHome = smartHomeTakeEventJson.takeSmartHome();
-
         SensorEventsManager sensorEventsManager = new SensorEventsManager();
-        sensorEventsManager.registerEventHandler(new EventHandlerAdapter(smartHome, eventHandling, chain, adapters));
+        sensorEventsManager.registerEventHandler(new EventHandlerAdapter(smartHome(), eventHandling(), chain, adapters));
         return sensorEventsManager;
     }
 
     @Bean
     EventHandling eventHandling(){
         return new EventHandlingDoorLightAlarm();
+    }
+
+    @Bean
+    SmartHome smartHome(){
+        return smartHomeTakeEventJson().takeSmartHome();
+    }
+
+    @Bean
+    SmartHomeTakeEvent smartHomeTakeEventJson(){
+        return new SmartHomeTakeEventJson("smart-home-1.js");
     }
 }
 
