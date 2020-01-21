@@ -2,6 +2,6 @@ package ru.sbt.mipt.oop.adapter;
 
 import ru.sbt.mipt.oop.SensorEvent;
 
-public interface SensorEventAdapter {
+public interface SensorEventConverter {
     SensorEvent toSensorEvent(Object o);
 }

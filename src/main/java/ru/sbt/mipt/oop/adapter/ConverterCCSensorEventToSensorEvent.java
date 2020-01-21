@@ -3,10 +3,10 @@ package ru.sbt.mipt.oop.adapter;
 import com.coolcompany.smarthome.events.CCSensorEvent;
 import ru.sbt.mipt.oop.SensorEvent;
 
-public class AdapterCCSensorEventToSensorEvent implements SensorEventAdapter{
+public class ConverterCCSensorEventToSensorEvent implements SensorEventConverter {
     private EventAdapter adapters[];
 
-    public AdapterCCSensorEventToSensorEvent(EventAdapter[] adapters) {
+    public ConverterCCSensorEventToSensorEvent(EventAdapter[] adapters) {
         this.adapters = adapters;
     }
 

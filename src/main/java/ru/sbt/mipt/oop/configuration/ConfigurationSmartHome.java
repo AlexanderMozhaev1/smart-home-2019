@@ -23,15 +23,23 @@ public class ConfigurationSmartHome {
 
     @Bean
     SensorEventsManager sensorEventsManager() {
+        SensorEventsManager sensorEventsManager = new SensorEventsManager();
+        sensorEventsManager.registerEventHandler(new EventHandlerAdapter(smartHome(), eventHandling(), chain(), adapters()));
+        return sensorEventsManager;
+    }
+
+    @Bean
+    EventSmartHome[] chain(){
         EventSmartHome chain[] = {new EventSmartHomeDoorClosed(), new EventSmartHomeDoorOpen(),
                 new EventSmartHomeLightOn(), new EventSmartHomeLightOff(),
                 new EventSmartHomeAlarmActivate(), new EventSmartHomeAlarmDeactivate()};
+        return chain;
+    }
 
+    @Bean
+    EventAdapter[] adapters(){
         EventAdapter adapters[] = {new DoorAdapter(), new LightAdapter()};
-
-        SensorEventsManager sensorEventsManager = new SensorEventsManager();
-        sensorEventsManager.registerEventHandler(new EventHandlerAdapter(smartHome(), eventHandling(), chain, adapters));
-        return sensorEventsManager;
+        return adapters;
     }
 
     @Bean

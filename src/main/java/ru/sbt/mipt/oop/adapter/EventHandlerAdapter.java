@@ -22,8 +22,8 @@ public class EventHandlerAdapter implements EventHandler {
 
     @Override
     public void handleEvent(CCSensorEvent event) {
-        SensorEventAdapter sensorEventAdapter = new AdapterCCSensorEventToSensorEvent(adapters);
-        SensorEvent sensorEvent = sensorEventAdapter.toSensorEvent(event);
+        SensorEventConverter sensorEventConverter = new ConverterCCSensorEventToSensorEvent(adapters);
+        SensorEvent sensorEvent = sensorEventConverter.toSensorEvent(event);
         this.eventHandling.produceEvent(sensorEvent, this.smartHome, chain);
     }
 
