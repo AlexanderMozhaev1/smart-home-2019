@@ -8,10 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import rc.RemoteControl;
 import rc.RemoteControlRegistry;
 import ru.sbt.mipt.oop.*;
-import ru.sbt.mipt.oop.adapter.DoorAdapter;
-import ru.sbt.mipt.oop.adapter.EventAdapter;
-import ru.sbt.mipt.oop.adapter.EventHandlerAdapter;
-import ru.sbt.mipt.oop.adapter.LightAdapter;
+import ru.sbt.mipt.oop.adapter.*;
 import ru.sbt.mipt.oop.alarm.EventSmartHomeAlarmActivate;
 import ru.sbt.mipt.oop.alarm.EventSmartHomeAlarmDeactivate;
 import ru.sbt.mipt.oop.remotecontrol.*;
@@ -24,13 +21,13 @@ public class ConfigurationSmartHome {
     @Bean
     SensorEventsManager sensorEventsManager() {
         SensorEventsManager sensorEventsManager = new SensorEventsManager();
-        sensorEventsManager.registerEventHandler(new EventHandlerAdapter(smartHome(), eventHandling(), chain(), adapters()));
+        sensorEventsManager.registerEventHandler(new EventHandlerAdapter(smartHome(), eventHandling(), chain(), converterCCSensorEventToSensorEvent()));
         return sensorEventsManager;
     }
 
     @Bean
     EventSmartHome[] chain(){
-        EventSmartHome chain[] = {new EventSmartHomeDoorClosed(), new EventSmartHomeDoorOpen(),
+        EventSmartHome chain[] = {new EventSmartHomeDecorator(), new EventSmartHomeDoorClosed(), new EventSmartHomeDoorOpen(),
                 new EventSmartHomeLightOn(), new EventSmartHomeLightOff(),
                 new EventSmartHomeAlarmActivate(), new EventSmartHomeAlarmDeactivate()};
         return chain;
@@ -105,6 +102,9 @@ public class ConfigurationSmartHome {
     LightOnHomeCommand lightOnHomeCommand(SmartHome smartHome){
         return new LightOnHomeCommand(smartHome);
     }
+
+    @Bean
+    ConverterCCSensorEventToSensorEvent converterCCSensorEventToSensorEvent() {return new ConverterCCSensorEventToSensorEvent(adapters());}
 
 }
 
